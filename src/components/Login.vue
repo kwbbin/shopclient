@@ -60,7 +60,8 @@ export default {
       this.$axios({
               url:str,
               method:'post',
-              data:obj
+              data:obj,
+              headers: {'token':localStorage.getItem("token")},
           })
           .then(res=>{
               this.mydata = res.data.data;
@@ -81,7 +82,8 @@ export default {
       var jsons={loginName:this.username,password:this.password}
       this.requestPost('/user/login',jsons,function(){
         if(This.code == 0){
-          This.msg="注册成功，正在跳转登录界面，请稍等";
+          localStorage.setItem("token",This.mydata)
+          This.msg="登录成功，正在跳转登录界面，请稍等";
             setTimeout(function(){
               This.$router.push('/');
             },4000);

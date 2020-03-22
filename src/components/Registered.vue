@@ -78,13 +78,6 @@
 	  <div class="Note"><span class="login_link">已是会员 <router-link to="/login"> 请登录</router-link></span></div>	  
 	  </form>
 		</div>	
-        {{'user= '+username+"--------"}}
-        {{'pass= '+password+"--------"}}	
-        {{'passAgin= '+passwordAgin+"--------"}}	
-        {{'email= '+email+"--------"}}	
-        {{'phone= '+phone+"--------"}}	
-        {{'vCode= '+vCode+"--------"}}	
-        {{msg}}	
    </div>
 </div>
 <!--底部样式-->

@@ -21,14 +21,14 @@ Vue.use(Vuelidate)
 Vue.config.productionTip = false
 
 
-router.beforeEach((to,from,next)=>{
-  if(to.path=='/' || localStorage.getItem('token') != null){
-   next();
-  }else{
+// router.beforeEach((to,from,next)=>{
+//   if(to.path=='/' || localStorage.getItem('token') != null){
+//    next();
+//   }else{
    
-   next('/');
-  }
-})
+//    next('/');
+//   }
+// })
 
 // axios.interceptors.request.use(
 

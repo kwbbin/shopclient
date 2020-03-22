@@ -10,7 +10,7 @@
           <div class="Collection">{{getTime()}}欢迎光临旺旺超市！<em></em><a href="#">收藏我们</a></div>
       <div class="hd_top_manu clearfix">
         <ul class="clearfix">
-        <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<router-link to="/login" class="red">[请登录]</router-link> 新用户<router-link to="/regist" class="red">[免费注册]</router-link></li>
+        <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<span class="red" v-if="user!=''">{{loginName}}</span><span class="red hand" v-if="user!=''" @click="loginOut()">注销</span><router-link to="/login" class="red" v-if="user==''">[请登录]</router-link> <span v-if="user==''">新用户</span><router-link to="/regist" v-if="user==''" class="red">[免费注册]</router-link></li>
         <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#">我的订单</a></li> 
         <li class="hd_menu_tit" data-addclass="hd_menu_hover"> <a href="#">购物车(<b>0</b>)</a> </li>
         <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#">联系我们</a></li>
@@ -174,223 +174,48 @@
       </div>
       </div>
      
+     <div>
       <!--产品版块样式图层-->
-      <div class="Product_area clearfix">
-      <div class="area_title"><div class="name"><span class="floors">1F</span>男装女装</div></div>
+      <div class="Product_area clearfix" v-for="(item, index) in hotShowHome" :key="index">
+      <div class="area_title"><div class="name"><span class="floors">{{item.num}}F</span>{{item.name}}</div></div>
       <div class="list_style clearfix">
         <div class="Left_side">
         <ul>
-          <li><a href="#"><img src="../assets/Products/AD-1.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-2.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-3.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-4.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[1].imageUrl" width="219" height="219" /><div class="Layers" ></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[2].imageUrl" width="219" height="219"  /><div class="Layers" ></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[3].imageUrl" width="219" height="219"  /><div class="Layers"></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[4].imageUrl" width="219" height="219"  /><div class="Layers"></div></a></li>
         </ul>
         </div>
         <div class="middle">
-        <!--广告-->
-          <div class="hd">
-            <a class="prev" href="javascript:void(0)">&gt;</a>
-        <a class="next" href="javascript:void(0)">&lt;</a>
-          </div>
           <div class="bd">
           <ul>
-            <li><a href="#"><img src="../assets/Products/AD-5.jpg" /></a></li>
-            <!-- <li><a href="#"><img src="../assets/Products/AD-6.jpg" /></a></li> -->
+            <li><a href="#" class="big"><img  :src="'http://127.0.0.1:8083/file'+item.list[0].imageUrl" /><div class="Layers"></div></a></li>
           </ul>
           </div>    
         </div>
         
         <div class="Left_side">
         <ul>
-          <li><a href="#"><img src="../assets/Products/AD-1.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-2.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-3.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-4.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[5].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[6].imageUrl" width="219" height="219"/><div class="Layers"></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[7].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
+          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[8].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
         </ul>
         </div>
         <div class="advertising">
-        <a href="#"><img src="../assets/Products/AD-7.jpg"  width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-8.jpg" width="219" height="150"/></a>
-        <a href="#" class="da_AD"><img src="../assets/Products/AD-9.jpg" width="318" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-10.jpg" width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-7.jpg" width="219" height="150"/></a>
-        </div>
-        <!--品牌-->
-        <div class="Brand_Gallery">
-        <a href="#"><img src="../assets/Brand/p-1.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-4.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-6.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-11.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-14.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-17.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-19.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-13.jpg"  width="120" height="32"/></a>
-        </div>
-      </div>
-      </div>
-        <!--产品版块样式图层-->
-      <div class="Product_area clearfix">
-      <div class="area_title"><div class="name"><span class="floors">2F</span>个人美妆</div></div>
-      <div class="list_style clearfix">
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/AD-1.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-2.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-3.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-4.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
+        <ul class="ulImg">
+          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[9].imageUrl"  width="219" height="150"/><div class="Layers"></div></a>
+          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[10].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
+          <a href="#" class="da_AD middle"><img :src="'http://127.0.0.1:8083/file'+item.list[11].imageUrl" width="318" height="150"/><div class="Layers"></div></a>
+          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[12].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
+          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[13].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
         </ul>
         </div>
-        <div class="middle">
-        <!--广告-->
-          <div class="hd">
-            <a class="prev" href="javascript:void(0)">&gt;</a>
-        <a class="next" href="javascript:void(0)">&lt;</a>
-          </div>
-          <div class="bd">
-          <ul>
-          <li><a href="#"><img src="../assets/Products/AD-5.jpg" /></a></li>
-            <!-- <li><a href="#"><img src="../assets/Products/AD-6.jpg" /></a></li> -->
-          </ul>
-          </div>    
-        </div>
-        
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/AD-15.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-16.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-17.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-18.jpg" /><div class="Layers"><img src="../assets/images/bg_img.png" /></div></a></li>
-        </ul>
-        </div>
-        <div class="advertising">
-        <a href="#"><img src="../assets/Products/AD-11.jpg"  width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-12.jpg" width="219" height="150"/></a>
-        <a href="#" class="da_AD"><img src="../assets/Products/AD-14.jpg" width="318" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-13.jpg" width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-19.jpg" width="219" height="150"/></a>
-        </div>
-        <!--品牌-->
-        <div class="Brand_Gallery">
-        <a href="#"><img src="../assets/Brand/p-1.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-4.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-6.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-11.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-14.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-17.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-19.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-13.jpg"  width="120" height="32"/></a>
-        </div>
       </div>
       </div>
-        <!--产品版块样式图层-->
-      <div class="Product_area clearfix">
-      <div class="area_title"><div class="name"><span class="floors">3F</span>美食保健</div></div>
-      <div class="list_style clearfix">
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/S-AD-5.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/S-AD-6.jpg" width="200" height="220" /><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-3.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-4.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-        </ul>
-        </div>
-        <div class="middle">
-        <!--广告-->
-          <div class="hd">
-            <a class="prev" href="javascript:void(0)">&gt;</a>
-        <a class="next" href="javascript:void(0)">&lt;</a>
-          </div>
-          <div class="bd">
-          <ul>
-          <li><a href="#"><img src="../assets/Products/AD-5.jpg" /></a></li>
-            <!-- <li><a href="#"><img src="../assets/Products/AD-6.jpg" /></a></li> -->
-          </ul>
-          </div>    
-        </div>
-        
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/S-AD-1.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/S-AD-2.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/S-AD-3.jpg" width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/S-AD-4.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-        </ul>
-        </div>
-        <div class="advertising">
-        <a href="#"><img src="../assets/Products/S-AD-X-1.jpg"  width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/S-AD-X-2.jpg" width="219" height="150"/></a>
-        <a href="#" class="da_AD"><img src="../assets/Products/AD-14.jpg" width="318" height="150"/></a>
-        <a href="#"><img src="../assets/Products/S-AD-X-3.jpg" width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/AD-19.jpg" width="219" height="150"/></a>
-        </div>
-        <!--品牌-->
-        <div class="Brand_Gallery">
-        <a href="#"><img src="../assets/Brand/p-1.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-4.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-6.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-11.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-14.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-17.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-19.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-13.jpg"  width="120" height="32"/></a>
-        </div>
-      </div>
-      </div>
-        <!--产品版块样式图层-->
-      <div class="Product_area clearfix">
-      <div class="area_title"><div class="name"><span class="floors">4F</span>鞋子箱包</div></div>
-      <div class="list_style clearfix">
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/X-AD-5.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/X-AD-6.jpg" width="200" height="220" /><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/X-AD-7.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-          <li><a href="#"><img src="../assets/Products/AD-4.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png" /></div></a></li>
-        </ul>
-        </div>
-        <div class="middle">
-        <!--广告-->
-          <div class="hd">
-            <a class="prev" href="javascript:void(0)">&gt;</a>
-        <a class="next" href="javascript:void(0)">&lt;</a>
-          </div>
-          <div class="bd">
-          <ul>
-          <li><a href="#"><img src="../assets/Products/AD-5.jpg" /></a></li>
-            <!-- <li><a href="#"><img src="../assets/Products/AD-6.jpg" /></a></li> -->
-          </ul>
-          </div>    
-        </div>
-        
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img src="../assets/Products/X-AD-1.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/X-AD-2.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/X-AD-3.jpg" width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-          <li><a href="#"><img src="../assets/Products/S-AD-4.jpg"  width="200" height="220"/><div class="Layers"><img src="images/bg_img.png"  width="220" height="220"/></div></a></li>
-        </ul>
-        </div>
-        <div class="advertising">
-        <a href="#"><img src="../assets/Products/S-AD-X-1.jpg"  width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/S-AD-X-2.jpg" width="219" height="150"/></a>
-        <a href="#" class="da_AD"><img src="../assets/Products/AD-14.jpg" width="318" height="150"/></a>
-        <a href="#"><img src="../assets/Products/S-AD-X-3.jpg" width="219" height="150"/></a>
-        <a href="#"><img src="../assets/Products/X-AD-1.jpg" width="219" height="150"/></a>
-        </div>
-        <!--品牌-->
-        <div class="Brand_Gallery">
-        <a href="#"><img src="../assets/Brand/p-1.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-4.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-6.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-11.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-14.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-17.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-19.jpg"  width="120" height="32"/></a>
-        <a href="#"><img src="../assets/Brand/p-13.jpg"  width="120" height="32"/></a>
-        </div>
-      </div>
-      </div>
-      <!--热销-->
+
+    </div>
     <div id="showcase" class="advanced">
       <div id="guessyou" class="m"><div class="mt"><h2>猜你喜欢</h2><a href="javascript:;" class="extra">更多</a></div>
         <div class="mc"><div class="spacer"><i></i></div>
@@ -642,6 +467,7 @@ import '@/assets/css/common.css'
 import '@/assets/js/common_js.js'
 import '@/assets/js/footer.js'
 import '@/assets/font/iconfont.css'
+import { hostname } from 'os'
 
 export default {
   name: 'HelloWorld',
@@ -652,7 +478,11 @@ export default {
       mydata:'',
       msg:'',
       code:'',
-      token:''
+      token:'',
+      user:'',
+      loginName:'',
+      hotShowHome:'',
+      str:''
     }
   },
   methods: {
@@ -660,7 +490,8 @@ export default {
       this.$axios({
               url:str,
               method:'post',
-              data:obj
+              data:obj,
+              headers: {'token':localStorage.getItem("token")},
           })
           .then(res=>{
               this.mydata = res.data.data;
@@ -698,8 +529,33 @@ export default {
         $(".CategoryBox").css("display","none");
     },
     initData:function(){
+      var This = this;
       this.requestPost('/user/home/Category');
+      if(localStorage.getItem('token')!=null){
+        this.requestPost('/user/getLoginUser',null,function(){
+          if(This.mydata!= null)
+          This.user = This.mydate;
+          This.loginName = This.mydata.loginName;
+        },null)
+      }
+      This.initHomeShow();
+    },
+    loginOut:function(){
+      this.requestPost('/user/loginOut');
+      localStorage.removeItem("token");
+      this.loginName = '';
+      this.user = '';
+      alert("已注销");
+    },
+    initHomeShow:function(){
+      var This = this;
+      this.requestPost('/home/goods',null,function(){
+        if(This.mydata!= null){
+          This.hotShowHome=This.mydata;
+        }
+      },null)
     }
+
   },
   created:function(){
     initScript();
@@ -788,5 +644,47 @@ function initScript(){
     border:1px solid #008cd6;
   }
 
+.hand{
+  cursor:pointer;
+}
+.Product_area  .list_style ul>li>a:hover .Layers{
+  display: block;
+}
+.Product_area  .list_style ul>li>a .Layers{
+  display: none;
+  background: #000;
+  opacity:0.1;
+  width: 219px;
+  height: 219px;
+  position: relative;
+  top:-222px;
+}
 
+.Product_area  .list_style ul>li>a.big:hover .Layers{
+  display: block;
+}
+.Product_area  .list_style ul>li>a.big .Layers{
+  display: none;
+  background: #000;
+  opacity:0.1;
+  width: 317px;
+  height: 440px;
+  position: relative;
+  top:-440px;
+}
+.Product_area  .list_style .ulImg a:hover .Layers{
+  display: block;
+}
+.Product_area  .list_style .ulImg a.middle .Layers{
+  width: 318px;
+}
+.Product_area  .list_style .ulImg a .Layers{
+  display: none;
+  background: #000;
+  opacity:0.1;
+  width: 219px;
+  height: 150px;
+  position: relative;
+  top:-150px;
+}
 </style>
