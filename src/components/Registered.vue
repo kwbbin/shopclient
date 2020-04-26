@@ -5,7 +5,7 @@
  <div class="Narrow">
   <div class=" left logo"><a href="#"><img src="../assets/images/logo.png" /></a></div>
   <!--可修改图层-->
-  <div class=" left festival"><a href="#"><img src="../assets/images/logo_yd.png" /></a></div>
+  <!-- <div class=" left festival"><a href="#"><img src="../assets/images/logo_yd.png" /></a></div> -->
   <!--电话图层-->
   <div class="phone">全国服务热线：<em>400-345-5633</em></div>
  </div>

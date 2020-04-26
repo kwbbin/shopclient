@@ -11,26 +11,10 @@
       <div class="hd_top_manu clearfix">
         <ul class="clearfix">
         <li class="hd_menu_tit zhuce" data-addclass="hd_menu_hover">欢迎光临本店！<span class="red" v-if="user!=''">{{loginName}}</span><span class="red hand" v-if="user!=''" @click="loginOut()">注销</span><router-link to="/login" class="red" v-if="user==''">[请登录]</router-link> <span v-if="user==''">新用户</span><router-link to="/regist" v-if="user==''" class="red">[免费注册]</router-link></li>
-        <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#">我的订单</a></li> 
-        <li class="hd_menu_tit" data-addclass="hd_menu_hover"> <a href="#">购物车(<b>0</b>)</a> </li>
+        <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#"><router-link to="/pay">我的订单</router-link></a></li> 
+        <li class="hd_menu_tit" data-addclass="hd_menu_hover"> <a href="#"><router-link to="/ShoppingCart">购物车</router-link></a> </li>
         <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#">联系我们</a></li>
-        <li class="hd_menu_tit list_name" data-addclass="hd_menu_hover"><a href="#" class="hd_menu">客户服务</a>
-          <div class="hd_menu_list">
-          <ul>
-            <li><a href="#">常见问题</a></li>
-          <li><a href="#">在线退换货</a></li>
-            <li><a href="#">在线投诉</a></li>
-          <li><a href="#">配送范围</a></li>
-          </ul>
-        </div>	   
-        </li>
-          <li class="hd_menu_tit phone_c" data-addclass="hd_menu_hover"><a href="#" class="hd_menu "><em class="iconfont icon-phone"></em>手机版</a>
-          <div class="hd_menu_list erweima">
-          <ul>
-                <img src="images/erweima.png"  width="100px" height="100"/>
-          </ul>
-        </div>	   
-        </li>
+        <li class="hd_menu_tit" data-addclass="hd_menu_hover"><a href="#"><router-link to="/user">我的信息</router-link></a></li> 
         </ul>
       </div>
         </div>
@@ -40,34 +24,18 @@
     <div id="header "  class="header page_style">
       <div class="logo"><a href="#"><img  style="width:200px;" src="../assets/images/logo.png" /></a></div>
       <!--可修改图层-->
-      <div class="festival"><a href="#"><img  src="../assets/images/logo_yd.png" /></a></div>
+      <!-- <div class="festival"><a href="#"><img  src="../assets/images/logo_yd.png" /></a></div> -->
       <!--结束图层-->
       <div class="Search">
-        <p><input name="" type="text"  class="text"/><input name="" type="submit" value="搜 索"  class="Search_btn"/></p>
-      <p class="Words"><a href="#">苹果</a><a href="#">香蕉</a><a href="#">菠萝</a><a href="#">西红柿</a><a href="#">橙子</a><a href="#">苹果</a></p>
+        <p><input name="" v-model="searchStr" type="text"  class="text"/><input name="" type="submit" value="搜 索"   @click="searchGoods()"  class="Search_btn"/></p>
+      <!-- <p class="Words"><a href="#">苹果</a><a href="#">香蕉</a><a href="#">菠萝</a><a href="#">西红柿</a><a href="#">橙子</a><a href="#">苹果</a></p> -->
     </div>
     <!--可修改图层2-->
       <!--<div class="festival1"><a href="#"><img src="images/logo_sd.png" /></a></div>--><!--结束-->
     <!--购物车样式-->
     <div class="hd_Shopping_list" id="Shopping_list">
-      <div class="s_cart"><em></em><a href="#">我的购物车</a> <i class="ci-right">&gt;</i><i class="ci-count" id="shopping-amount">0</i></div>
-      <div class="dorpdown-layer">
-        <div class="spacer"></div>
-      <!-- <div class="prompt"></div><div class="nogoods"><b></b>购物车中还没有商品，赶紧选购吧！</div> -->
-      <ul class="p_s_list">	   
-        <li>
-            <div class="img"><img src="images/tianma.png"></div>
-            <div class="content"><p><a href="#">产品名称</a></p><p>颜色分类:紫花8255尺码:XL</p></div>
-          <div class="Operations">
-          <p class="Price">￥55.00</p>
-          <p><a href="#">删除</a></p></div>
-          </li>
-        </ul>		
-      <div class="Shopping_style">
-      <div class="p-total">共<b>1</b>件商品　共计<strong>￥ 515.00</strong></div>
-        <a href="#" title="去购物车结算" id="btn-payforgoods" class="Shopping">去购物车结算</a>
-      </div>	 
-      </div>
+      <div class="s_cart"><em></em><a href="#"><router-link to="/ShoppingCart">我的购物车</router-link></a> <i class="ci-right">&gt;</i></div>
+     
     </div>
     </div>
     <!--菜单导航样式-->
@@ -77,11 +45,11 @@
         <div class="t_menu_img"></div>
         <div class="Category"  @mouseenter="CategoryBoxShow(true)" @mouseleave="CategoryBoxShow(false)"><a href="#"><i class="el-icon-s-fold"></i>&nbsp;&nbsp;&nbsp;所有产品分类</a></div>
         <div class="CategoryBox" @mouseenter="CategoryBoxShow(true)" @mouseleave="CategoryBoxShow(false)" >
-            <div v-for="(item, i) in mydata">
+            <div v-for="(item, i) in category">
                 <div style="display:inline-block;float:left;width:155px;height:190px;margin:10px;border-right:1px solid #eee;">
                   <h3>{{i}}</h3>
                   <span v-for="(it, j) in item">
-                    <span style="display:inline-block;float:left;width:75px;height:25px;text-align:left">{{it}}</span>
+                    <span style="display:inline-block;float:left;width:75px;height:25px;text-align:left"><router-link :to="{path:'/categoryGoods', query:{cId:it.twoId}}">{{it.sortTwo}}</router-link></span>
                   </span>
                 </div>
             </div>
@@ -90,15 +58,10 @@
       
       <!--菜单栏-->
       <div class="Navigation" id="Navigation">
-        <ul class="Navigation_name">
-          <li><a href="#">美食</a></li>
-          <li><a href="#">美妆</a></li>
-          <li><a href="#">服饰</a></li>
-          <li><a href="#">产品预订</a></li>
-          <li><a href="#">积分商城</a></li>
-          <li><a href="#">礼品DIY</a></li>
-          <li><a href="#">联系我们</a></li>
-          <li><a href="index.html">简洁版</a></li>
+        <ul class="Navigation_name" >
+          <li><router-link :to="{path:'/categoryGoods', query:{cId:133}}">休闲食品</router-link></li>
+          <li><router-link :to="{path:'/categoryGoods', query:{cId:138}}">美容护肤</router-link></li>
+          <li><router-link :to="{path:'/categoryGoods', query:{cId:159}}">水果</router-link></li>
         </ul>			 
         </div>	
       </div>
@@ -142,7 +105,7 @@
     </div>
     <div class="index_style clearfix" id="service_list">
       <div class="service_style">
-        <ul class="service_list">
+        <!-- <ul class="service_list">
         <li class="xianduan"><a href="#"><em class="iconfont icon-plane"></em><h2>机票</h2></a></li>
         <li><a href="#"><em class="iconfont icon-train"></em><h2>火车票</h2></a></li>
         <li><a href="#"><em class="iconfont icon-friendfill"></em><h2>便民服务</h2></a></li>
@@ -151,7 +114,7 @@
         <li><a href="#"><em class="iconfont icon-chongzhi"></em><h2>充值</h2></a></li>
         <li><a href="#"><em class="iconfont icon-car"></em><h2>交通违章</h2></a></li>
         <li><a href="#"><em class="iconfont icon-xiangzi"></em><h2>成人用品</h2></a></li>
-        </ul>
+        </ul> -->
       </div>
     </div>
     <div class="index_style clearfix">
@@ -178,143 +141,23 @@
       <!--产品版块样式图层-->
       <div class="Product_area clearfix" v-for="(item, index) in hotShowHome" :key="index">
       <div class="area_title"><div class="name"><span class="floors">{{item.num}}F</span>{{item.name}}</div></div>
-      <div class="list_style clearfix">
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[1].imageUrl" width="219" height="219" /><div class="Layers" ></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[2].imageUrl" width="219" height="219"  /><div class="Layers" ></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[3].imageUrl" width="219" height="219"  /><div class="Layers"></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[4].imageUrl" width="219" height="219"  /><div class="Layers"></div></a></li>
-        </ul>
-        </div>
-        <div class="middle">
-          <div class="bd">
-          <ul>
-            <li><a href="#" class="big"><img  :src="'http://127.0.0.1:8083/file'+item.list[0].imageUrl" /><div class="Layers"></div></a></li>
-          </ul>
-          </div>    
-        </div>
-        
-        <div class="Left_side">
-        <ul>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[5].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[6].imageUrl" width="219" height="219"/><div class="Layers"></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[7].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
-          <li><a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[8].imageUrl" width="219" height="219" /><div class="Layers"></div></a></li>
-        </ul>
-        </div>
-        <div class="advertising">
-        <ul class="ulImg">
-          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[9].imageUrl"  width="219" height="150"/><div class="Layers"></div></a>
-          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[10].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
-          <a href="#" class="da_AD middle"><img :src="'http://127.0.0.1:8083/file'+item.list[11].imageUrl" width="318" height="150"/><div class="Layers"></div></a>
-          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[12].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
-          <a href="#"><img :src="'http://127.0.0.1:8083/file'+item.list[13].imageUrl" width="219" height="150"/><div class="Layers"></div></a>
-        </ul>
-        </div>
-      </div>
+            <!-- {{item.list}} -->
+            <div class="imageBox" v-for="(item1, index) in item.list" v-if="index<12" >
+               <router-link v-bind:to="'/goodsDetails'+item1.goodsId" ><img class="img" :src="'http://127.0.0.1:8083/file'+item1.imageUrl" :alt="item1.goodsDesc"></router-link>
+               <div class="detail">
+                   <div class="name"><p>{{item1.name}}</p></div>
+                   <div class="desc"><p>{{item1.goodsDesc}}</p></div>
+               </div>
+           </div>
+      
       </div>
 
     </div>
-    <div id="showcase" class="advanced">
-      <div id="guessyou" class="m"><div class="mt"><h2>猜你喜欢</h2><a href="javascript:;" class="extra">更多</a></div>
-        <div class="mc"><div class="spacer"><i></i></div>
-        <ul id="lists">        
-        <li class="fore1">           
-        <div class="p-img">
-        <a data-clk="" href="" target="_blank"><img data-lazy-img="done" width="130" height="130" title="夏普（SHARP）LCD-50V3A 50英寸安卓智能液晶电视（黑色）" src="Products/product_img.jpg" class=""></a>
-        </div>                
-        <div class="p-info">               
-          <div class="p-name">
-          <a data-clk="" href="" target="_blank" title="夏普（SHARP）LCD-50V3A 50英寸安卓智能液晶电视（黑色）">夏普（SHARP）LCD-50V3A 50英寸安卓智能液晶电视（黑色）</a></div>
-          <div class="p-price" data-lazyload-fn="done"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>            
-          </div> 
-          <div class="Detailed" style="display: none;">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>       
-          </li>        
-          <li class="fore2">           
-          <div class="p-img"><a data-clk="" href="h" target="_blank">
-          <img data-lazy-img="done" width="130" height="130" title="海信（Hisense）LED55EC520UA 55英寸 VIDAA3 14核 炫彩4K智能电视(黑色)" src="Products/product_img1.jpg" class=""></a></div>              
-            <div class="p-info">              
-              <div class="p-name">
-              <a data-clk="" href="" target="_blank" title="海信（Hisense）LED55EC520UA 55英寸 VIDAA3 14核 炫彩4K智能电视(黑色)">海信（Hisense）LED55EC520UA 55英寸 VIDAA3 14核 炫彩4K智能电视(黑色)</a></div>
-              <div class="p-price"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>            
-          </div> 
-            <div class="Detailed" style="display: none;">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>       
-            </li>        
-            <li class="fore3">            
-            <div class="p-img">
-            <a data-clk="" href="" target="_blank">
-            <img data-lazy-img="done" width="130" height="130" title="联想 扬天W4090V 台式税控专用电脑（G3260双核 4G1T DVD WIN7) 标配主机(无显示器)" src="Products/product_img2.jpg" class=""></a></div>             
-            <div class="p-info">               
-            <div class="p-name">
-            <a href="" target="_blank" title="联想 扬天W4090V 台式税控专用电脑（G3260双核 4G1T DVD WIN7) 标配主机(无显示器)">联想 扬天W4090V 台式税控专用电脑（G3260双核 4G1T DVD WIN7) 标配主机(无显示器)</a></div>
-              <div class="p-price"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>       
-                </div> 
-                  <div class="Detailed">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>     
-              </li>        
-              <li class="fore4">         
-                <div class="p-img">
-                <a href="" target="_blank">
-                <img data-lazy-img="done" width="130" height="130" title="联想（Lenovo） 扬天R4905d 台式电脑 （G1820 4G 500G） 商用电脑 20英寸普通LED屏" src="Products/product_img3.jpg" class=""></a></div>
-                <div class="p-info">             
-                  <div class="p-name">
-                  <a href="" target="_blank" title="联想（Lenovo） 扬天R4905d 台式电脑 （G1820 4G 500G） 商用电脑 20英寸普通LED屏">联想（Lenovo） 扬天R4905d 台式电脑 （G1820 4G 500G） 商用电脑 20英寸普通LED屏</a></div>
-                    <div class="p-price"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>          
-              </div>  
-              <div class="Detailed">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>    
-              </li>       
-                <li class="fore5">       
-                <div class="p-img">
-                <a data-clk="" href="" target="_blank"><img data-lazy-img="done" width="130" height="130" title="金正（NINTAUS）韩式 电火锅 多用锅 家用 5L" src="Products/product_img4.jpg" class=""></a></div>
-                    <div class="p-info">                
-                      <div class="p-name">
-                      <a href="" target="_blank" title="金正（NINTAUS）韩式 电火锅 多用锅 家用 5L">金正（NINTAUS）韩式 电火锅 多用锅 家用 5L</a>
-                      </div>
-                      <div class="p-price"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>          
-              </div>   
-              <div class="Detailed">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>  
-              </li>       
-            <li class="fore6">           
-              <div class="p-img">
-              <a data-clk="" href="" target="_blank">
-              <img data-lazy-img="done" width="130" height="130" title="洗颜专科 柔澈泡沫 洁面乳 120g（资生堂授权）" src="Products/product_img5.jpg" class=""></a>  
-              </div>          
-            <div class="p-info">                
-            <div class="p-name">
-            <a data-clk="" href="#" target="_blank" title="洗颜专科 柔澈泡沫 洁面乳 120g（资生堂授权）">洗颜专科 柔澈泡沫 洁面乳 120g（资生堂授权）</a></div>
-            <div class="p-price"><span class="left"><i>¥</i>48.00</span><span class="Original_Price">45.9</span></div>     
-            </div>
-              <div class="Detailed">
-        <div class="content">
-          <p class="center"><a href="#" class="Buy_btn">立即购买</a></p>
-          </div>
-        </div>        
-            </li>
-          </ul>
-          </div>
-        </div>
-        </div>
+   
     </div>
+
+
+
       <!--底部样式-->
     <div class="ft_footer_service" id="footer">
       <div class="footerbox" >
@@ -367,96 +210,14 @@
       </dl>	   
       </div>
       <!--信息内容-->
-
-      <!--认证-->
-    <!--认证展示样式-->
-    <div class="Authenticate left clearfix" id="Authenticate_show">
-      <div class="Authenticate_show">
-      <div class="picMarquee-left">
-          <div class="hd">
-            <a class="next">&lt;</a>
-            <a class="prev">&gt;</a>
-          </div>
-          <div class="bd">
-            <ul class="picList">
-              <li>
-                <div class="pic"><a href="" target="_blank"><img src="../assets/images/pic1.jpg" /></a></div>
-                              <!--<div class="title"><a href="http://www.SuperSlide2.com" target="_blank">效果图1</a></div>-->					
-                        </li>
-              <li>
-                <div class="pic"><a href="" target="_blank"><img src="../assets/images/pic2.jpg" /></a></div>
-                <!--<div class="title"><a href="http://www.SuperSlide2.com" target="_blank">效果图2</a></div>-->
-              </li>
-              <li>
-                <div class="pic"><a href="" target="_blank"><img src="../assets/images/pic3.jpg" /></a></div>
-                
-              </li>
-              <li>
-                <div class="pic"><a href="" target="_blank"><img src="../assets/images/pic4.jpg" /></a></div>
-                
-              </li>
-              <li>
-                <div class="pic"><a href="" target="_blank"><img src="../assets/images/pic5.jpg" /></a></div>
-                
-              </li>
-              
-            </ul>
-          </div>
-        </div>
-
-        
       </div>
-    </div>
-      </div>
+
     <div class="text_link">
       <p>
       <a href="#">关于我们</a>｜ <a href="#">公开信息披露</a>｜ <a href="#">加入我们</a>｜ <a href="#">联系我们</a>｜ <a href="#">版权声明</a>｜ <a href="#">隐私声明</a>｜ <a href="#">网站地图</a></p>
       <p>蜀ICP备11017033号 Copyright ©2011 成都福际生物技术有限公司 All Rights Reserved. Technical support:CDDGG Group</p>
       </div>
       </div>
-    </div>
-    <!--右侧菜单栏购物车样式-->
-    <div class="fixedBox">
-      <ul class="fixedBoxList">
-          <li class="fixeBoxLi user"><a href="#"> <span class="fixeBoxSpan iconfont icon-my"></span> <strong>用户</strong></a> </li>
-        <li class="fixeBoxLi cart_bd" style="display:block;" id="cartboxs">
-        <p class="good_cart">0</p>
-          <span class="fixeBoxSpan iconfont icon-cart"></span> <strong>购物车</strong>
-          <div class="cartBox">
-              <div class="bjfff"></div><div class="message">购物车内暂无商品，赶紧选购吧</div>    </div></li>
-        <li class="fixeBoxLi Service "> <span class="fixeBoxSpan iconfont icon-qq1"></span> <strong>客服</strong>
-          <div class="ServiceBox">
-            <div class="bjfffs"></div>
-            <dl onclick="javascript:;">
-            <dt><img src=""></dt>
-              <dd><strong>QQ客服1</strong>
-                  <p class="p1">9:00-22:00</p>
-                  <p class="p2"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456&amp;site=DGG三端同步&amp;menu=yes">点击交谈</a></p>
-                  </dd>
-                </dl>
-            <dl onclick="javascript:;">
-                  <dt><img src=""></dt>
-                  <dd> <strong>QQ客服1</strong>
-                    <p class="p1">9:00-22:00</p>
-                    <p class="p2"><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=123456&amp;site=DGG三端同步&amp;menu=yes">点击交谈</a></p>
-                  </dd>
-                </dl>
-                </div>
-        </li>
-      <li class="fixeBoxLi code cart_bd " style="display:block;" id="cartboxs">
-          <span class="fixeBoxSpan iconfont icon-weixin"></span> <strong>微信</strong>
-          <div class="cartBox">
-              <div class="bjfff"></div>
-          <div class="QR_code">
-          <p><img src="" width="150px" height="150px" style=" margin-top:10px;" /></p>
-          <p>微信扫一扫，关注我们</p>
-          </div>		
-          </div>
-          </li>
-
-        <li class="fixeBoxLi Home"> <a href="./"> <span class="fixeBoxSpan iconfont  icon-collect"></span> <strong>收藏</strong> </a> </li>
-        <li class="fixeBoxLi BackToTop"> <span class="fixeBoxSpan iconfont icon-top"></span> <strong>返回顶部</strong> </li>
-      </ul>
     </div>
   </div>
 </template>
@@ -482,7 +243,11 @@ export default {
       user:'',
       loginName:'',
       hotShowHome:'',
-      str:''
+      str:'',
+      category:'',
+      searchStr:'',
+      guessGoods:'',
+      notice:''
     }
   },
   methods: {
@@ -523,14 +288,18 @@ export default {
         return "下午好，"
     },
     CategoryBoxShow:function (show){
-      if(show==true)
+      var This=this;
+      if(show==true){
         $(".CategoryBox").css("display","block");
+      }
       else
         $(".CategoryBox").css("display","none");
     },
     initData:function(){
       var This = this;
-      this.requestPost('/user/home/Category');
+      this.requestPost('/user/home/CategoryDetail',null,function() {
+        This.category=This.mydata;
+      },null);
       if(localStorage.getItem('token')!=null){
         this.requestPost('/user/getLoginUser',null,function(){
           if(This.mydata!= null)
@@ -539,6 +308,9 @@ export default {
         },null)
       }
       This.initHomeShow();
+      This.guessUserLove();
+      This.getNotice();
+
     },
     loginOut:function(){
       this.requestPost('/user/loginOut');
@@ -552,6 +324,35 @@ export default {
       this.requestPost('/home/goods',null,function(){
         if(This.mydata!= null){
           This.hotShowHome=This.mydata;
+        }
+      },null)
+    },
+    searchGoods:function(){
+      var This = this;
+        This.$router.push({path: '/searchGoods', query: {searchStr: This.searchStr}});
+    },
+    guessUserLove:function(){
+      var This = this;
+      this.requestPost('/goods/guessUserLove',null,function(){
+        if(This.mydata!= null){
+          This.guessGoods=This.mydata;
+        }
+      },null)
+    },getNotice:function(){
+      
+      var This = this;
+      this.requestPost('/getNotLookNitice',null,function(){
+        if(This.mydata!= null){
+          This.notice=This.mydata;
+          for(var i=0;i<This.notice.length;i++){
+            This.$notify.info({
+              title: '通知',
+              dangerouslyUseHTMLString: true,
+              message: "<h6>标题："+This.notice[i].title+"</h6><p >内容："+This.notice[i].noticeContent+"</p>",
+              duration: 0
+            });
+          }
+          
         }
       },null)
     }
@@ -660,10 +461,10 @@ function initScript(){
   top:-222px;
 }
 
-.Product_area  .list_style ul>li>a.big:hover .Layers{
+.Product_area  .list_style ul>li a.big:hover .Layers{
   display: block;
 }
-.Product_area  .list_style ul>li>a.big .Layers{
+.Product_area  .list_style ul>li a.big .Layers{
   display: none;
   background: #000;
   opacity:0.1;
@@ -687,4 +488,41 @@ function initScript(){
   position: relative;
   top:-150px;
 }
+
+
+
+.imageBox{
+    background: lightcyan;
+    width:180px;
+    height: 240px;
+    margin-right: 10px;;
+    float: left;
+    margin-bottom: 10px;;
+    margin-top: 20px;
+}
+.imageBox .img{
+    width:180px;
+    height: 180px;
+
+
+}
+.imageBox .detail{
+    height: 60px;
+    background: #fff;
+    text-align: center ;;
+}
+.imageBox .detail .name{
+    height: 30px;;
+    line-height: 30px;
+    font-size: 16px;
+
+}
+.imageBox .detail .desc{
+    height: 30px;;
+    line-height: 30px;
+    color: #999;
+    font-size: 14px;
+    
+}
+
 </style>

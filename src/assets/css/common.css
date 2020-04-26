@@ -174,7 +174,8 @@ li:after{
 .header .festival1{float:left; margin-top:10px; margin-left:30px;}
 /**************************************************/
 .header{ font-family:"新宋体"; margin-bottom:20px; height:110px;}
-.header .logo{ width:250px;float:left; padding-top:10px}
+.header .logo{ width:250px;float:left; padding-top:10px;}
+.header .logo img{height: 100px;}
 .header .Search{ float:left; margin-top:40px; position:relative}
 .header .Search .Words{ margin-top:5px;}
 .header .Search .Search_style{ position:relative}

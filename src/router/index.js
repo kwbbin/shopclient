@@ -4,6 +4,12 @@ import HelloWorld from '@/components/HelloWorld'
 import Index from '@/components/Index'
 import Login from '@/components/Login'
 import Regist from '@/components/Registered'
+import GoodsDetail from '@/components/GoodsDetail'
+import ShoppingCart from '@/components/ShoppingCart'
+import GoPay from '@/components/GoPay'
+import User from '@/components/User'
+import CategoryGoods from '@/components/CategoryGoods'
+import SearchGoods from '@/components/SearchGoods'
 
 Vue.use(Router)
 
@@ -29,6 +35,31 @@ export default new Router({
       path: '/hello',
       name: 'HelloWorld',
       component: HelloWorld
+    },
+    {
+      path: '/goodsDetails:id',
+      name: 'GoodsDetail',
+      component: GoodsDetail
+    },{
+      path: '/ShoppingCart',
+      name: 'ShoppingCart',
+      component: ShoppingCart
+    },{
+      path:'/pay',
+      name:'pay',
+      component: GoPay
+    },{
+      path:'/user',
+      name:'user',
+      component: User
+    },{
+      path:'/categoryGoods',
+      name:'categoryGoods',
+      component: CategoryGoods
+    },{
+      path:'/searchGoods',
+      name:'searchGoods',
+      component: SearchGoods
     }
   ]
 })
